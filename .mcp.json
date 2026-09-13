@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "ozon": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm", "--shm-size=1g",
+        "-v", "${OZON_MCP_DATA_DIR:-/opt/ozon-mcp}:/data",
+        "ozon-mcp"
+      ]
+    }
+  }
+}

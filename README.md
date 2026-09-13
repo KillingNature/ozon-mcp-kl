@@ -275,6 +275,29 @@ Under `http` and `sse` the same port serves Prometheus metrics at `/metrics`: up
 request outcomes and latency, antibot re-challenges, session bootstraps, browser
 state.
 
+## Claude Code
+
+The repo ships a project-scoped `.mcp.json` that launches the server the same
+way as the `docker run` above, so opening this directory in Claude Code offers
+it automatically — build the image first:
+
+```bash
+docker build -t ozon-mcp .
+```
+
+To register it without relying on auto-discovery:
+
+```bash
+claude mcp add ozon -- docker run -i --rm --shm-size=1g -v /opt/ozon-mcp:/data ozon-mcp
+```
+
+`.mcp.json` reads `OZON_MCP_DATA_DIR` for the bind mount, defaulting to
+`/opt/ozon-mcp`; set it if the profile should live elsewhere. Either way, the
+one interactive login from **Session lifetime** below still has to happen once
+before any tool call works, and writes/orders stay off until `OZON_ENABLE_WRITES`
+/ `OZON_ENABLE_ORDERS` are set — on the `docker run` command above, or in
+`.mcp.json`'s `env`.
+
 ## Session lifetime
 
 A signed-out session looks exactly like an empty account — no orders, no
