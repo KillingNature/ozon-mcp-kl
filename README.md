@@ -61,6 +61,7 @@ login — makes the others wait.
 | `product_details` | Card: price, variants (each with its own sku), characteristics, photos; description and reviews on request |
 | `get_reviews` | Rating, review count, the breakdown per star, and reviews to any depth (`sort="worst"` for the complaints) |
 | `get_description` | Description text plus the images embedded in it |
+| `get_photos` | The card's gallery photo URLs on their own, without the rest of the card |
 | `delivery_estimate` | When a product would arrive, to which address, from which warehouse |
 | `find_cheaper` | The cheapest lots of the same thing: Ozon's own other-seller offers plus a price-sorted search |
 

@@ -111,6 +111,16 @@ async def get_description(sku_or_url: SkuOrUrl) -> Description:
 
 
 @mcp.tool()
+async def get_photos(sku_or_url: SkuOrUrl) -> list[str]:
+    """The card's gallery photo URLs, in the order Ozon shows them.
+    Same set product_details() returns as `photos` — call this on its own
+    when the rest of the card is not needed. Does not include the
+    description's images (get_description()) or review photos (get_reviews()).
+    """
+    return await run_blocking(lambda: catalog.get_photos(sku_or_url))
+
+
+@mcp.tool()
 async def delivery_estimate(sku_or_url: SkuOrUrl) -> DeliveryEstimate:
     """When a product would arrive, to which of the account's addresses, and
     from which warehouse ("Завтра, 2 сентября" / "ул. Данилова, 17" / "Со
