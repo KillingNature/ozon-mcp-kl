@@ -63,6 +63,15 @@ def test_the_walk_stops_at_the_count_the_page_displays(session: FakeSession) -> 
     assert [tile.sku for tile in favorites.list_favorites(100)] == ["1", "2"]
 
 
+def test_get_photos_reads_the_gallery_on_its_own(session: FakeSession) -> None:
+    session.pages = {
+        "/product/3077454533": page(
+            webGallery={"images": [{"src": "https://ir.ozone.ru/s3/multimedia-1/a.jpg"}]}
+        )
+    }
+    assert catalog.get_photos("3077454533") == ["https://ir.ozone.ru/s3/multimedia-1/a.jpg"]
+
+
 def test_a_delivery_estimate_names_what_it_is_relative_to(session: FakeSession) -> None:
     session.pages = {
         "webDelivery": {
